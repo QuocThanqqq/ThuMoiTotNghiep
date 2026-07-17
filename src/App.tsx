@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarDays,
   Clock,
@@ -12,10 +12,7 @@ import {
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
   type MotionProps,
-  type MotionValue,
 } from "framer-motion";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
@@ -391,66 +388,9 @@ function Journey() {
   );
 }
 
-function WordReveal({
-  text,
-  progress,
-  className,
-}: {
-  text: string;
-  progress: MotionValue<number>;
-  className: string;
-}) {
-  const words = text.split(" ");
-
-  return (
-    <p className={className}>
-      {words.map((word, index) => (
-        <RevealWord
-          key={`${word}-${index}`}
-          word={word}
-          index={index}
-          total={words.length}
-          progress={progress}
-        />
-      ))}
-    </p>
-  );
-}
-
-function RevealWord({
-  word,
-  index,
-  total,
-  progress,
-}: {
-  word: string;
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-}) {
-  const opacity = useTransform(progress, [index / total, index / total + 0.18], [0.22, 1]);
-  const clean = word.toLowerCase().replace(/[.,]/g, "");
-  const highlighted = ["gieo", "chữ", "yêu", "thương", "lớp", "học", "hạnh", "phúc"].includes(clean);
-
-  return (
-    <motion.span
-      style={{ opacity }}
-      className={highlighted ? "text-[hsl(var(--deep-red))]" : "text-[hsl(var(--foreground))]"}
-    >
-      {word}{" "}
-    </motion.span>
-  );
-}
-
 function Mission() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 75%", "end 35%"],
-  });
-
   return (
-    <section ref={ref} className="px-5 py-20 md:px-10">
+    <section className="px-5 py-20 md:px-10">
       <div className="mx-auto max-w-6xl">
         <motion.img
           {...fadeUp(0)}
@@ -458,18 +398,42 @@ function Mission() {
           alt="Lớp học ấm áp với bảng phấn, sách vở, cửa lớp và hoa cúc"
           className="mx-auto aspect-square w-full max-w-[720px] rounded-[2rem] border border-[hsl(var(--border))] object-cover shadow-[0_26px_70px_rgba(91,69,45,0.16)]"
         />
-        <div className="mt-14">
-          <WordReveal
-            progress={scrollYProgress}
-            className="font-serif text-3xl font-semibold leading-tight md:text-5xl"
-            text="Tốt nghiệp không chỉ là dấu chấm kết thúc cho những năm tháng giảng đường, mà còn là cánh cửa mở ra hành trình gieo chữ, gieo yêu thương và cùng học sinh tạo nên một lớp học hạnh phúc."
-          />
-          <WordReveal
-            progress={scrollYProgress}
-            className="mt-9 text-2xl font-medium leading-snug md:text-3xl"
-            text="Mỗi bài giảng sẽ là một hạt mầm, mỗi học sinh sẽ là một câu chuyện và mỗi ngày đến lớp sẽ là một ngày đáng nhớ."
-          />
-        </div>
+        <motion.article
+          {...fadeUp(0.08)}
+          className="paper-glass mx-auto mt-14 max-w-5xl rounded-[2rem] p-7 leading-8 md:p-10"
+        >
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-muted-foreground">
+            Lời phê của
+          </p>
+          <h2 className="mt-3 font-serif text-4xl font-semibold uppercase leading-tight text-[hsl(var(--sage-dark))] md:text-6xl">
+            "Cô giáo tương lai"
+          </h2>
+          <div className="mt-8 space-y-6 text-lg text-[hsl(var(--foreground))] md:text-xl">
+            <div>
+              <p className="font-semibold">Nhận xét của giáo viên chủ nhiệm:</p>
+              <ul className="mt-3 space-y-2 pl-5">
+                <li className="list-disc">Luôn đồng hành cùng mình trong những năm tháng thanh xuân.</li>
+                <li className="list-disc">Hoàn thành tốt nhiệm vụ làm một người bạn tuyệt vời.</li>
+                <li className="list-disc">
+                  Cần phát huy tinh thần đúng giờ và có mặt đầy đủ trong Lễ tốt nghiệp của cô giáo tương lai.
+                </li>
+              </ul>
+            </div>
+            <p>
+              <span className="font-semibold text-[hsl(var(--deep-red))]">Đánh giá cuối kỳ:</span> Xuất sắc.
+            </p>
+            <p>
+              <span className="font-semibold text-[hsl(var(--deep-red))]">Bài tập về nhà:</span> Đến dự Lễ tốt
+              nghiệp của mình, mang theo một nụ cười thật tươi và cùng mình chụp thật nhiều ảnh đẹp.
+            </p>
+            <p>
+              <span className="font-semibold text-[hsl(var(--deep-red))]">Lời nhắn của cô giáo tương lai:</span> Đề
+              nghị bạn có mặt đúng giờ, trang phục chỉnh tề, tinh thần phấn khởi để thực hiện nhiệm vụ: Chụp ảnh kỷ
+              niệm và chung vui cùng mình. Sự vắng mặt không có lý do chính đáng sẽ bị tính là một "thiệt thòi lớn"
+              cho tình bạn của chúng ta. Hẹn gặp bạn nhé!
+            </p>
+          </div>
+        </motion.article>
       </div>
     </section>
   );
