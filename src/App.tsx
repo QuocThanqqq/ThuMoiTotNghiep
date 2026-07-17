@@ -7,7 +7,6 @@ import {
   Heart,
   MapPin,
   Navigation,
-  NotebookPen,
   Sparkles,
 } from "lucide-react";
 import {
@@ -18,11 +17,6 @@ import {
   type MotionProps,
   type MotionValue,
 } from "framer-motion";
-import {
-  AnimatedSchoolIcon,
-  ParallaxIconLayer,
-  type SchoolIconKind,
-} from "./components/SchoolIcons";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
@@ -55,13 +49,13 @@ const eventInfo = [
   },
 ];
 
-const journey: { title: string; icon: SchoolIconKind }[] = [
-  { title: "Ngày đầu bước vào giảng đường", icon: "book" },
-  { title: "Những giờ học đầy kỉ niệm", icon: "notebook" },
-  { title: "Những ngày thực tập sư phạm", icon: "chalkboard" },
-  { title: "Những học sinh đầu tiên", icon: "blocks" },
-  { title: "Khoảnh khắc khoác áo tốt nghiệp", icon: "cap" },
-  { title: "Bắt đầu hành trình trở thành cô giáo", icon: "globe" },
+const journey = [
+  "Ngày đầu bước vào giảng đường",
+  "Những giờ học đầy kỉ niệm",
+  "Những ngày thực tập sư phạm",
+  "Những học sinh đầu tiên",
+  "Khoảnh khắc khoác áo tốt nghiệp",
+  "Bắt đầu hành trình trở thành cô giáo",
 ];
 
 const gallery = [
@@ -168,35 +162,10 @@ function FloatingPetals() {
   );
 }
 
-function Daisy({ className = "" }: { className?: string }) {
-  return (
-    <div className={`daisy-cluster ${className}`} aria-hidden="true">
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
-      <i />
-    </div>
-  );
-}
-
 function Hero() {
-  const heroIcons = [
-    { kind: "cap", className: "right-[8%] top-28 hidden md:block", size: "md", delay: 0.1, strength: 7 },
-    { kind: "pencil", className: "left-[3%] top-[34%] hidden lg:block", size: "lg", delay: 0.4, strength: 10 },
-    { kind: "book", className: "left-[48%] top-[56%] hidden xl:block", size: "md", delay: 0.8, strength: 6 },
-    { kind: "apple", className: "right-[14%] bottom-[24%] hidden md:block", size: "sm", delay: 1.1, strength: 8 },
-    { kind: "daisy", className: "left-[30%] top-[18%] hidden lg:block", size: "sm", delay: 1.4, strength: 7 },
-    { kind: "bag", className: "right-[4%] bottom-[11%] hidden lg:block", size: "md", delay: 0.2, strength: 9 },
-    { kind: "heart", className: "right-[34%] top-[30%] hidden md:block", size: "sm", delay: 1.7, strength: 5 },
-  ] as const;
-
   return (
     <section id="home" className="relative min-h-screen overflow-hidden px-5 pb-20 pt-28 md:px-10 md:pt-32">
       <FloatingPetals />
-      <ParallaxIconLayer icons={[...heroIcons]} />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[hsl(var(--background))] to-transparent" />
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div {...fadeUp(0.05)} className="relative mx-auto w-full max-w-md lg:max-w-none">
@@ -243,21 +212,6 @@ function Hero() {
               Xem thông tin buổi lễ
             </PaperButton>
           </motion.div>
-          <motion.div
-            {...fadeUp(0.48)}
-            className="flex flex-wrap items-center gap-4 pt-2"
-            aria-label="Biểu tượng học đường trang trí"
-          >
-            {(["book", "pencil", "cap", "apple", "bag"] as SchoolIconKind[]).map((kind, index) => (
-              <AnimatedSchoolIcon
-                key={kind}
-                kind={kind}
-                size="md"
-                delay={index * 0.15}
-                className="school-icon-inline"
-              />
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
@@ -265,33 +219,92 @@ function Hero() {
 }
 
 function Invitation() {
-  const [guestName, setGuestName] = useState("");
+  const getInitialGuestName = () => {
+    if (typeof window === "undefined") {
+      return "";
+    }
+
+    return new URLSearchParams(window.location.search).get("name")?.trim() ?? "";
+  };
+
+  const sharedGuestName = getInitialGuestName();
+  const isSharedInvitation = sharedGuestName.length > 0;
+  const [guestName, setGuestName] = useState(sharedGuestName);
+  const [generatedLink, setGeneratedLink] = useState("");
+  const [copyLabel, setCopyLabel] = useState("Copy link");
+
+  const createGuestLink = () => {
+    const cleanName = guestName.trim();
+
+    if (!cleanName) {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("name", cleanName);
+    url.hash = "invitation";
+    setGeneratedLink(url.toString());
+    setCopyLabel("Copy link");
+  };
+
+  const copyGuestLink = async () => {
+    if (!generatedLink) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(generatedLink);
+    setCopyLabel("Đã copy");
+  };
 
   return (
     <section id="invitation" className="px-5 py-20 md:px-10">
-      <motion.div {...fadeUp(0)} className="mx-auto mb-8 max-w-xl text-center">
-        <label className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" htmlFor="guest-name">
-          Cá nhân hóa thiệp mời
-        </label>
-        <input
-          id="guest-name"
-          value={guestName}
-          onChange={(event) => setGuestName(event.target.value)}
-          placeholder="Nhập tên của bạn"
-          className="mt-4 h-13 w-full rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--paper))] px-6 py-4 text-center text-base shadow-sm outline-none transition focus:border-[hsl(var(--sage-dark))] focus:ring-2 focus:ring-ring/30"
-        />
-      </motion.div>
+      {!isSharedInvitation ? (
+        <motion.div {...fadeUp(0)} className="mx-auto mb-8 max-w-2xl text-center">
+          <label className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" htmlFor="guest-name">
+            Cá nhân hóa thiệp mời
+          </label>
+          <input
+            id="guest-name"
+            value={guestName}
+            onChange={(event) => {
+              setGuestName(event.target.value);
+              setGeneratedLink("");
+              setCopyLabel("Copy link");
+            }}
+            placeholder="Nhập tên người nhận"
+            className="mt-4 h-13 w-full rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--paper))] px-6 py-4 text-center text-base shadow-sm outline-none transition focus:border-[hsl(var(--sage-dark))] focus:ring-2 focus:ring-ring/30"
+          />
+          <div className="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={createGuestLink}
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[hsl(var(--deep-red))] px-7 py-3 text-sm font-semibold text-primary-foreground shadow-[0_14px_26px_rgba(127,45,38,0.2)] transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={!guestName.trim()}
+            >
+              Tạo link
+            </button>
+            <button
+              type="button"
+              onClick={copyGuestLink}
+              className="paper-glass inline-flex min-h-12 items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-[hsl(var(--brown))] transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={!generatedLink}
+            >
+              {copyLabel}
+            </button>
+          </div>
+          {generatedLink ? (
+            <p className="mx-auto mt-4 max-w-xl break-all rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--paper))]/75 px-4 py-3 text-sm leading-6 text-muted-foreground">
+              {generatedLink}
+            </p>
+          ) : null}
+        </motion.div>
+      ) : null}
 
       <motion.div
         {...fadeUp(0.08)}
         className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-[hsl(var(--border))] bg-[hsl(var(--paper))] shadow-[0_30px_80px_rgba(91,69,45,0.16)]"
       >
-        <AnimatedSchoolIcon kind="paperclip" size="sm" delay={0.1} className="absolute left-9 top-12 z-10" />
-        <AnimatedSchoolIcon kind="pencil" size="sm" delay={0.6} className="absolute right-12 top-24 z-10 hidden sm:block" />
-        <AnimatedSchoolIcon kind="chalkboard" size="sm" delay={1} className="absolute bottom-28 left-12 z-10 hidden sm:block" />
-        <AnimatedSchoolIcon kind="certificate" size="sm" delay={1.2} className="absolute bottom-20 right-14 z-10" />
-        <AnimatedSchoolIcon kind="ruler" size="sm" delay={1.5} className="absolute left-1/2 top-9 z-10 hidden md:block" />
-        <AnimatedSchoolIcon kind="notebook" size="sm" delay={1.8} className="absolute bottom-10 left-[44%] z-10 hidden md:block" />
         <div className="page-corner left-8 top-8" />
         <div className="page-corner bottom-8 left-8 rotate-[-90deg]" />
         <div className="page-corner right-8 top-8 rotate-90" />
@@ -306,7 +319,7 @@ function Invitation() {
             animate={{ opacity: 1, y: 0 }}
             className="my-6 min-h-9 w-full max-w-sm border-b border-dotted border-[hsl(var(--brown))] font-hand text-3xl text-[hsl(var(--deep-red))]"
           >
-            {guestName || "................................................"}
+            {guestName.trim() || "................................................"}
           </motion.div>
           <p className="text-lg text-muted-foreground">đến dự</p>
           <h2 className="mt-4 font-serif text-5xl uppercase tracking-wide text-[hsl(var(--sage-dark))] md:text-6xl">
@@ -352,15 +365,14 @@ function Journey() {
 
           return (
           <motion.article
-            key={item.title}
+            key={item}
             {...fadeUp(index * 0.06)}
             className="paper-glass paper-card group relative min-h-56 rounded-2xl p-6"
           >
-            <AnimatedSchoolIcon kind={item.icon} size="sm" delay={index * 0.15} className="absolute -right-3 -top-5 z-10" />
             <span className="absolute -top-3 left-8 h-6 w-6 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--accent))]" />
             <span className="absolute right-8 top-5 text-3xl text-[hsl(var(--sage-dark))]/35">✿</span>
             <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Kỉ niệm {index + 1}</p>
-            <h3 className="mt-4 font-serif text-2xl text-[hsl(var(--foreground))]">{item.title}</h3>
+            <h3 className="mt-4 font-serif text-2xl text-[hsl(var(--foreground))]">{item}</h3>
             <img
               src={asset(memory.image)}
               alt={memory.caption}
@@ -464,8 +476,6 @@ function Mission() {
 }
 
 function EventInfo() {
-  const infoIcons: SchoolIconKind[] = ["clock", "calendar", "globe", "ribbon"];
-
   return (
     <section id="info" className="px-5 py-20 md:px-10">
       <div className="mx-auto max-w-7xl">
@@ -479,8 +489,7 @@ function EventInfo() {
         </motion.h2>
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {eventInfo.map(({ icon: Icon, title, value }, index) => (
-            <motion.article key={title} {...fadeUp(index * 0.07)} className="paper-glass relative rounded-2xl p-6 pt-12">
-              <AnimatedSchoolIcon kind={infoIcons[index]} size="sm" delay={index * 0.2} className="absolute -top-5 right-5 z-10" />
+            <motion.article key={title} {...fadeUp(index * 0.07)} className="paper-glass relative rounded-2xl p-6">
               <Icon className="h-7 w-7 text-[hsl(var(--sage-dark))]" />
               <h3 className="mt-5 font-serif text-2xl">{title}</h3>
               <p className="mt-3 leading-7 text-muted-foreground">{value}</p>
@@ -503,17 +512,8 @@ function EventInfo() {
 }
 
 function Gallery() {
-  const galleryIcons = [
-    { kind: "pencil", className: "left-[7%] top-32 hidden md:block", size: "sm", delay: 0.2, strength: 8 },
-    { kind: "paperclip", className: "right-[12%] top-20 hidden md:block", size: "sm", delay: 0.6, strength: 6 },
-    { kind: "apple", className: "left-[47%] top-36 hidden lg:block", size: "sm", delay: 1, strength: 7 },
-    { kind: "daisy", className: "right-[5%] bottom-24 hidden lg:block", size: "sm", delay: 1.4, strength: 7 },
-    { kind: "heart", className: "left-[18%] bottom-12 hidden md:block", size: "sm", delay: 1.8, strength: 5 },
-  ] as const;
-
   return (
     <section className="relative px-5 py-20 md:px-10">
-      <ParallaxIconLayer icons={[...galleryIcons]} />
       <motion.h2 {...fadeUp(0)} className="text-center font-serif text-5xl font-semibold md:text-6xl">
         Những mảnh ghép thanh xuân
       </motion.h2>
@@ -551,13 +551,6 @@ function FinalCta() {
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-[hsl(var(--cream))]/60" />
-      <div className="pointer-events-none absolute inset-0 z-10" aria-hidden="true">
-        <AnimatedSchoolIcon kind="door" size="lg" delay={0.1} className="absolute left-[8%] top-16 hidden md:block" />
-        <AnimatedSchoolIcon kind="cap" size="md" delay={0.5} className="absolute right-[14%] top-20 hidden md:block" />
-        <AnimatedSchoolIcon kind="book" size="lg" delay={0.9} className="absolute bottom-12 left-[18%] hidden lg:block" />
-        <AnimatedSchoolIcon kind="note" size="sm" delay={1.3} className="absolute right-[25%] bottom-16 hidden md:block" />
-        <AnimatedSchoolIcon kind="daisy" size="sm" delay={1.7} className="absolute bottom-10 right-[9%] hidden md:block" />
-      </div>
       <div className="relative z-10 mx-auto max-w-3xl">
         <Logo />
         <motion.h2 {...fadeUp(0)} className="mt-8 font-serif text-5xl font-semibold md:text-7xl">
