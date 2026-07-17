@@ -19,8 +19,6 @@ import {
   type MotionValue,
 } from "framer-motion";
 
-const classroomVideo =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4";
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 const fadeUp = (delay: number): MotionProps => ({
@@ -200,7 +198,7 @@ function Hero() {
         <motion.div {...fadeUp(0.05)} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="torn-paper relative overflow-hidden rounded-[2rem] bg-[hsl(var(--paper))] p-3 shadow-[0_24px_60px_rgba(91,69,45,0.18)]">
             <img
-              src={asset("graduation-reference.jpg")}
+              src={asset("graduation-portrait.png")}
               alt="Chân dung cô gái mặc áo tốt nghiệp đen đỏ"
               className="aspect-[3/2] h-auto w-full rounded-[1.5rem] object-contain object-center lg:aspect-auto lg:h-[560px] lg:object-cover lg:object-left"
             />
@@ -419,15 +417,11 @@ function Mission() {
   return (
     <section ref={ref} className="px-5 py-20 md:px-10">
       <div className="mx-auto max-w-6xl">
-        <motion.video
+        <motion.img
           {...fadeUp(0)}
-          src={classroomVideo}
+          src={asset("school-cta-bg.png")}
+          alt="Lớp học ấm áp với bảng phấn, sách vở, cửa lớp và hoa cúc"
           className="mx-auto aspect-square w-full max-w-[720px] rounded-[2rem] border border-[hsl(var(--border))] object-cover shadow-[0_26px_70px_rgba(91,69,45,0.16)]"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
         />
         <div className="mt-14">
           <WordReveal
