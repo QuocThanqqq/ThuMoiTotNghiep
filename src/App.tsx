@@ -243,6 +243,21 @@ function Hero() {
               Xem thông tin buổi lễ
             </PaperButton>
           </motion.div>
+          <motion.div
+            {...fadeUp(0.48)}
+            className="flex flex-wrap items-center gap-4 pt-2"
+            aria-label="Biểu tượng học đường trang trí"
+          >
+            {(["book", "pencil", "cap", "apple", "bag"] as SchoolIconKind[]).map((kind, index) => (
+              <AnimatedSchoolIcon
+                key={kind}
+                kind={kind}
+                size="md"
+                delay={index * 0.15}
+                className="school-icon-inline"
+              />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

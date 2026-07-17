@@ -418,23 +418,44 @@
     align-items: center;
     justify-content: center;
     pointer-events: auto;
-    filter: drop-shadow(0 16px 18px rgba(91, 69, 45, 0.16));
+    z-index: 35;
+    border: 1px solid rgba(117, 129, 102, 0.34);
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.92), rgba(255, 248, 232, 0.74) 46%, rgba(226, 208, 171, 0.54));
+    box-shadow:
+      0 18px 34px rgba(91, 69, 45, 0.22),
+      inset 0 1px 2px rgba(255, 255, 255, 0.88),
+      inset 0 -10px 18px rgba(91, 69, 45, 0.08);
+    filter: drop-shadow(0 16px 18px rgba(91, 69, 45, 0.18));
     transform-style: preserve-3d;
   }
 
   .school-icon-sm {
-    width: 72px;
-    height: 72px;
+    width: 86px;
+    height: 86px;
   }
 
   .school-icon-md {
-    width: 104px;
-    height: 104px;
+    width: 122px;
+    height: 122px;
   }
 
   .school-icon-lg {
-    width: 136px;
-    height: 136px;
+    width: 154px;
+    height: 154px;
+  }
+
+  .school-icon-inline {
+    position: relative;
+    flex: 0 0 auto;
+    width: 82px;
+    height: 82px;
+  }
+
+  .school-icon-inline .school-icon-shape {
+    width: 68%;
+    height: 68%;
   }
 
   .school-icon-shape {
@@ -447,9 +468,9 @@
       radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.58), transparent 28%),
       linear-gradient(145deg, #fff2d5, #d8b782);
     box-shadow:
-      inset -9px -12px 18px rgba(92, 65, 38, 0.13),
-      inset 8px 9px 15px rgba(255, 255, 255, 0.5),
-      0 10px 22px rgba(91, 69, 45, 0.15);
+      inset -12px -14px 20px rgba(92, 65, 38, 0.18),
+      inset 9px 10px 16px rgba(255, 255, 255, 0.62),
+      0 12px 24px rgba(91, 69, 45, 0.2);
   }
 
   .school-icon-shape::after {
