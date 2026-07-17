@@ -412,6 +412,602 @@
     position: relative;
   }
 
+  .school-icon-wrap {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    filter: drop-shadow(0 16px 18px rgba(91, 69, 45, 0.16));
+    transform-style: preserve-3d;
+  }
+
+  .school-icon-sm {
+    width: 72px;
+    height: 72px;
+  }
+
+  .school-icon-md {
+    width: 104px;
+    height: 104px;
+  }
+
+  .school-icon-lg {
+    width: 136px;
+    height: 136px;
+  }
+
+  .school-icon-shape {
+    position: relative;
+    display: block;
+    width: 72%;
+    height: 72%;
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.58), transparent 28%),
+      linear-gradient(145deg, #fff2d5, #d8b782);
+    box-shadow:
+      inset -9px -12px 18px rgba(92, 65, 38, 0.13),
+      inset 8px 9px 15px rgba(255, 255, 255, 0.5),
+      0 10px 22px rgba(91, 69, 45, 0.15);
+  }
+
+  .school-icon-shape::after {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(circle at 18% 35%, rgba(116, 128, 98, 0.12) 0 2px, transparent 3px),
+      radial-gradient(circle at 72% 30%, rgba(139, 93, 51, 0.1) 0 1px, transparent 2px);
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  .school-icon-shape .icon-part {
+    position: absolute;
+    display: block;
+  }
+
+  .school-icon-shape .icon-mark {
+    position: absolute;
+    display: block;
+  }
+
+  .school-icon-book {
+    border-radius: 18px 18px 12px 12px;
+    background: linear-gradient(110deg, #a0ad8b 0 48%, #f7e6bf 49% 52%, #d8a36e 53% 100%);
+  }
+
+  .school-icon-book .icon-part-a,
+  .school-icon-notebook .icon-part-a {
+    left: 48%;
+    top: 12%;
+    width: 4px;
+    height: 76%;
+    border-radius: 999px;
+    background: rgba(91, 69, 45, 0.35);
+  }
+
+  .school-icon-book .icon-part-b,
+  .school-icon-notebook .icon-part-b {
+    left: 16%;
+    top: 28%;
+    width: 26%;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 252, 244, 0.75);
+    box-shadow: 0 12px 0 rgba(255, 252, 244, 0.55);
+  }
+
+  .school-icon-bookStack {
+    width: 78%;
+    height: 62%;
+    margin-top: 14%;
+    border-radius: 12px;
+    background: #a2ad8a;
+  }
+
+  .school-icon-bookStack .icon-part-a,
+  .school-icon-bookStack .icon-part-b,
+  .school-icon-bookStack .icon-part-c {
+    left: -5%;
+    width: 110%;
+    height: 25%;
+    border-radius: 8px;
+    border: 1px solid rgba(91, 69, 45, 0.2);
+  }
+
+  .school-icon-bookStack .icon-part-a {
+    top: -12%;
+    background: #d79370;
+  }
+
+  .school-icon-bookStack .icon-part-b {
+    top: 23%;
+    background: #f1d8a8;
+  }
+
+  .school-icon-bookStack .icon-part-c {
+    top: 58%;
+    background: #9aa883;
+  }
+
+  .school-icon-pencil,
+  .school-icon-ruler {
+    width: 26%;
+    height: 86%;
+    border-radius: 999px;
+    transform: rotate(38deg);
+    background: linear-gradient(90deg, #d29a63 0 18%, #f1d89f 18% 72%, #a3af8a 72% 100%);
+  }
+
+  .school-icon-pencil .icon-part-a {
+    left: 14%;
+    top: -15%;
+    width: 72%;
+    height: 20%;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    background: #7b5940;
+  }
+
+  .school-icon-pen {
+    width: 22%;
+    height: 86%;
+    border-radius: 999px;
+    transform: rotate(28deg);
+    background: linear-gradient(90deg, #6f7f62, #f2dbb1 22% 34%, #8b5d33 34% 100%);
+  }
+
+  .school-icon-pen .icon-part-a {
+    bottom: -13%;
+    left: 8%;
+    width: 84%;
+    height: 18%;
+    clip-path: polygon(50% 100%, 100% 0, 0 0);
+    background: #5b452d;
+  }
+
+  .school-icon-chalkboard {
+    border-radius: 10px;
+    border: 7px solid #b9874f;
+    background: #586647;
+  }
+
+  .school-icon-chalkboard .icon-part-a {
+    left: 16%;
+    top: 31%;
+    width: 68%;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 250, 240, 0.72);
+    box-shadow: 0 16px 0 rgba(255, 250, 240, 0.55);
+  }
+
+  .school-icon-bag {
+    height: 58%;
+    margin-top: 18%;
+    border-radius: 15px;
+    border: 2px solid #8b5d33;
+    background: linear-gradient(145deg, #c08a55, #9e6537);
+  }
+
+  .school-icon-bag .icon-part-a {
+    left: 28%;
+    top: -28%;
+    width: 38%;
+    height: 34%;
+    border: 6px solid #8b5d33;
+    border-bottom: 0;
+    border-radius: 999px 999px 0 0;
+  }
+
+  .school-icon-apple {
+    width: 62%;
+    height: 62%;
+    border-radius: 48% 52% 54% 46%;
+    background: linear-gradient(145deg, #c34b3f, #9f342e);
+  }
+
+  .school-icon-apple .icon-part-a {
+    left: 42%;
+    top: -16%;
+    width: 12%;
+    height: 24%;
+    border-radius: 999px;
+    background: #7b5134;
+    transform: rotate(14deg);
+  }
+
+  .school-icon-apple .icon-part-b {
+    right: 18%;
+    top: -5%;
+    width: 30%;
+    height: 20%;
+    border-radius: 100% 0;
+    background: #879675;
+    transform: rotate(-16deg);
+  }
+
+  .school-icon-daisy {
+    border-radius: 999px;
+    background: #d1a061;
+  }
+
+  .school-icon-daisy .icon-part-a,
+  .school-icon-daisy .icon-part-b,
+  .school-icon-daisy .icon-part-c,
+  .school-icon-daisy .icon-mark {
+    left: 38%;
+    top: -12%;
+    width: 24%;
+    height: 64%;
+    border-radius: 999px;
+    background: #fffaf0;
+    border: 1px solid #d8c6a5;
+    transform-origin: 50% 96%;
+  }
+
+  .school-icon-daisy .icon-part-b {
+    transform: rotate(72deg);
+  }
+
+  .school-icon-daisy .icon-part-c {
+    transform: rotate(144deg);
+  }
+
+  .school-icon-daisy .icon-mark {
+    transform: rotate(216deg);
+  }
+
+  .school-icon-cap {
+    height: 36%;
+    margin-top: 26%;
+    border-radius: 8px;
+    background: #536144;
+    transform: rotate(-6deg);
+  }
+
+  .school-icon-cap .icon-part-a {
+    left: -17%;
+    top: -48%;
+    width: 132%;
+    height: 70%;
+    clip-path: polygon(50% 0, 100% 42%, 50% 88%, 0 42%);
+    background: #6f7d60;
+  }
+
+  .school-icon-cap .icon-part-b {
+    right: 4%;
+    top: 6%;
+    width: 3px;
+    height: 88%;
+    background: #d8b782;
+  }
+
+  .school-icon-cap .icon-part-c {
+    right: -6%;
+    bottom: -22%;
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    background: #d8b782;
+  }
+
+  .school-icon-certificate,
+  .school-icon-note,
+  .school-icon-calendar {
+    border-radius: 10px;
+    background: linear-gradient(145deg, #fff8e8, #e8d6b4);
+  }
+
+  .school-icon-certificate .icon-part-a,
+  .school-icon-note .icon-part-a,
+  .school-icon-calendar .icon-part-a {
+    left: 18%;
+    top: 28%;
+    width: 62%;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(91, 69, 45, 0.28);
+    box-shadow: 0 14px 0 rgba(91, 69, 45, 0.2), 0 28px 0 rgba(91, 69, 45, 0.14);
+  }
+
+  .school-icon-certificate .icon-part-b {
+    right: -7%;
+    bottom: 14%;
+    width: 25%;
+    height: 25%;
+    border-radius: 999px;
+    background: #b7463a;
+  }
+
+  .school-icon-globe {
+    width: 60%;
+    height: 60%;
+    margin-top: 5%;
+    border-radius: 999px;
+    background: linear-gradient(145deg, #9fb194, #64765b);
+  }
+
+  .school-icon-globe .icon-part-a {
+    left: 16%;
+    top: 48%;
+    width: 68%;
+    height: 3px;
+    background: rgba(255, 250, 240, 0.6);
+  }
+
+  .school-icon-globe .icon-part-b {
+    left: 35%;
+    top: 10%;
+    width: 30%;
+    height: 80%;
+    border: 3px solid rgba(255, 250, 240, 0.48);
+    border-radius: 999px;
+  }
+
+  .school-icon-globe .icon-part-c {
+    left: 22%;
+    bottom: -28%;
+    width: 58%;
+    height: 10%;
+    border-radius: 999px;
+    background: #8b5d33;
+  }
+
+  .school-icon-bell {
+    width: 58%;
+    height: 58%;
+    margin-top: 10%;
+    border-radius: 50% 50% 16% 16%;
+    background: linear-gradient(145deg, #f0cf91, #c49457);
+  }
+
+  .school-icon-bell .icon-part-a {
+    left: 38%;
+    top: -13%;
+    width: 24%;
+    height: 18%;
+    border-radius: 999px;
+    background: #8b5d33;
+  }
+
+  .school-icon-bell .icon-part-b {
+    left: 42%;
+    bottom: -10%;
+    width: 16%;
+    height: 16%;
+    border-radius: 999px;
+    background: #8b5d33;
+  }
+
+  .school-icon-heart {
+    width: 54%;
+    height: 54%;
+    border-radius: 14px;
+    background: #d69b8a;
+    transform: rotate(45deg);
+  }
+
+  .school-icon-heart::before,
+  .school-icon-heart::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background: inherit;
+  }
+
+  .school-icon-heart::before {
+    left: -50%;
+  }
+
+  .school-icon-heart::after {
+    top: -50%;
+  }
+
+  .school-icon-door {
+    border-radius: 9px;
+    border: 6px solid #81906f;
+    background: linear-gradient(145deg, #aebca6, #879879);
+  }
+
+  .school-icon-door .icon-part-a {
+    inset: 18% 20% 44% 20%;
+    border: 4px solid rgba(72, 83, 64, 0.34);
+  }
+
+  .school-icon-door .icon-part-b {
+    right: 13%;
+    top: 55%;
+    width: 13%;
+    height: 13%;
+    border-radius: 999px;
+    background: #c89557;
+  }
+
+  .school-icon-lamp {
+    width: 62%;
+    height: 54%;
+    margin-top: 8%;
+    border-radius: 999px 999px 18px 18px;
+    background: #f1d8a8;
+  }
+
+  .school-icon-lamp .icon-part-a {
+    left: 45%;
+    top: 54%;
+    width: 10%;
+    height: 48%;
+    background: #8b5d33;
+  }
+
+  .school-icon-lamp .icon-part-b {
+    left: 23%;
+    bottom: -30%;
+    width: 54%;
+    height: 12%;
+    border-radius: 999px;
+    background: #8b5d33;
+  }
+
+  .school-icon-palette {
+    border-radius: 52% 48% 56% 44%;
+    background: #efd8b1;
+  }
+
+  .school-icon-palette .icon-part-a,
+  .school-icon-palette .icon-part-b,
+  .school-icon-palette .icon-part-c {
+    width: 17%;
+    height: 17%;
+    border-radius: 999px;
+  }
+
+  .school-icon-palette .icon-part-a {
+    left: 25%;
+    top: 25%;
+    background: #b7463a;
+  }
+
+  .school-icon-palette .icon-part-b {
+    right: 24%;
+    top: 28%;
+    background: #879675;
+  }
+
+  .school-icon-palette .icon-part-c {
+    left: 39%;
+    bottom: 22%;
+    background: #d0a25e;
+  }
+
+  .school-icon-blocks {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .school-icon-blocks .icon-part-a,
+  .school-icon-blocks .icon-part-b,
+  .school-icon-blocks .icon-part-c {
+    width: 42%;
+    height: 42%;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: #5b452d;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    box-shadow:
+      inset -6px -7px 12px rgba(92, 65, 38, 0.12),
+      inset 5px 5px 10px rgba(255, 255, 255, 0.48);
+  }
+
+  .school-icon-blocks .icon-part-a {
+    left: 8%;
+    top: 18%;
+    background: #f0d8a6;
+  }
+
+  .school-icon-blocks .icon-part-a::before {
+    content: "A";
+  }
+
+  .school-icon-blocks .icon-part-b {
+    right: 12%;
+    top: 9%;
+    background: #a2ad8a;
+  }
+
+  .school-icon-blocks .icon-part-b::before {
+    content: "B";
+  }
+
+  .school-icon-blocks .icon-part-c {
+    left: 30%;
+    bottom: 8%;
+    background: #d79370;
+  }
+
+  .school-icon-blocks .icon-part-c::before {
+    content: "C";
+  }
+
+  .school-icon-notebook {
+    border-radius: 12px;
+    background: linear-gradient(90deg, #9cad8b 0 20%, #fff8e8 20% 100%);
+  }
+
+  .school-icon-clock {
+    width: 64%;
+    height: 64%;
+    border-radius: 999px;
+    border: 6px solid #d2a76f;
+    background: #fff8e8;
+  }
+
+  .school-icon-clock .icon-part-a {
+    left: 48%;
+    top: 21%;
+    width: 4px;
+    height: 31%;
+    border-radius: 999px;
+    background: #6f7d60;
+  }
+
+  .school-icon-clock .icon-part-b {
+    left: 48%;
+    top: 48%;
+    width: 24%;
+    height: 4px;
+    border-radius: 999px;
+    background: #6f7d60;
+  }
+
+  .school-icon-ribbon {
+    border-radius: 999px 999px 18px 18px;
+    background: #d69b8a;
+  }
+
+  .school-icon-ribbon .icon-part-a,
+  .school-icon-ribbon .icon-part-b {
+    bottom: -30%;
+    width: 34%;
+    height: 48%;
+    clip-path: polygon(0 0, 100% 0, 74% 100%, 50% 75%, 25% 100%);
+    background: #c34b3f;
+  }
+
+  .school-icon-ribbon .icon-part-a {
+    left: 12%;
+    transform: rotate(8deg);
+  }
+
+  .school-icon-ribbon .icon-part-b {
+    right: 12%;
+    transform: rotate(-8deg);
+  }
+
+  .school-icon-paperclip {
+    width: 36%;
+    height: 70%;
+    border: 8px solid #b88b55;
+    border-radius: 999px;
+    background: transparent;
+    transform: rotate(28deg);
+  }
+
+  .school-icon-paperclip .icon-part-a {
+    left: 25%;
+    top: 18%;
+    width: 42%;
+    height: 62%;
+    border: 5px solid #d7b27b;
+    border-radius: 999px;
+  }
+
   @keyframes petal-fall {
     0% {
       transform: translateY(-20px) rotate(0deg);

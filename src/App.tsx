@@ -18,6 +18,11 @@ import {
   type MotionProps,
   type MotionValue,
 } from "framer-motion";
+import {
+  AnimatedSchoolIcon,
+  ParallaxIconLayer,
+  type SchoolIconKind,
+} from "./components/SchoolIcons";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
@@ -50,13 +55,13 @@ const eventInfo = [
   },
 ];
 
-const journey = [
-  "Ngày đầu bước vào giảng đường",
-  "Những giờ học đầy kỉ niệm",
-  "Những ngày thực tập sư phạm",
-  "Những học sinh đầu tiên",
-  "Khoảnh khắc khoác áo tốt nghiệp",
-  "Bắt đầu hành trình trở thành cô giáo",
+const journey: { title: string; icon: SchoolIconKind }[] = [
+  { title: "Ngày đầu bước vào giảng đường", icon: "book" },
+  { title: "Những giờ học đầy kỉ niệm", icon: "notebook" },
+  { title: "Những ngày thực tập sư phạm", icon: "chalkboard" },
+  { title: "Những học sinh đầu tiên", icon: "blocks" },
+  { title: "Khoảnh khắc khoác áo tốt nghiệp", icon: "cap" },
+  { title: "Bắt đầu hành trình trở thành cô giáo", icon: "globe" },
 ];
 
 const gallery = [
@@ -190,9 +195,20 @@ function Daisy({ className = "" }: { className?: string }) {
 }
 
 function Hero() {
+  const heroIcons = [
+    { kind: "cap", className: "right-[8%] top-28 hidden md:block", size: "md", delay: 0.1, strength: 7 },
+    { kind: "pencil", className: "left-[3%] top-[34%] hidden lg:block", size: "lg", delay: 0.4, strength: 10 },
+    { kind: "book", className: "left-[48%] top-[56%] hidden xl:block", size: "md", delay: 0.8, strength: 6 },
+    { kind: "apple", className: "right-[14%] bottom-[24%] hidden md:block", size: "sm", delay: 1.1, strength: 8 },
+    { kind: "daisy", className: "left-[30%] top-[18%] hidden lg:block", size: "sm", delay: 1.4, strength: 7 },
+    { kind: "bag", className: "right-[4%] bottom-[11%] hidden lg:block", size: "md", delay: 0.2, strength: 9 },
+    { kind: "heart", className: "right-[34%] top-[30%] hidden md:block", size: "sm", delay: 1.7, strength: 5 },
+  ] as const;
+
   return (
     <section id="home" className="relative min-h-screen overflow-hidden px-5 pb-20 pt-28 md:px-10 md:pt-32">
       <FloatingPetals />
+      <ParallaxIconLayer icons={[...heroIcons]} />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[hsl(var(--background))] to-transparent" />
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div {...fadeUp(0.05)} className="relative mx-auto w-full max-w-md lg:max-w-none">
@@ -240,7 +256,10 @@ function Hero() {
             </PaperButton>
           </motion.div>
           <motion.div {...fadeUp(0.5)}>
-            <ClassroomScene />
+            <div className="relative">
+              <AnimatedSchoolIcon kind="apple" size="sm" delay={0.3} className="absolute bottom-8 right-16 z-20 hidden md:block" />
+              <ClassroomScene />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -270,6 +289,12 @@ function Invitation() {
         {...fadeUp(0.08)}
         className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-[hsl(var(--border))] bg-[hsl(var(--paper))] shadow-[0_30px_80px_rgba(91,69,45,0.16)]"
       >
+        <AnimatedSchoolIcon kind="paperclip" size="sm" delay={0.1} className="absolute left-9 top-12 z-10" />
+        <AnimatedSchoolIcon kind="pencil" size="sm" delay={0.6} className="absolute right-12 top-24 z-10 hidden sm:block" />
+        <AnimatedSchoolIcon kind="chalkboard" size="sm" delay={1} className="absolute bottom-28 left-12 z-10 hidden sm:block" />
+        <AnimatedSchoolIcon kind="certificate" size="sm" delay={1.2} className="absolute bottom-20 right-14 z-10" />
+        <AnimatedSchoolIcon kind="ruler" size="sm" delay={1.5} className="absolute left-1/2 top-9 z-10 hidden md:block" />
+        <AnimatedSchoolIcon kind="notebook" size="sm" delay={1.8} className="absolute bottom-10 left-[44%] z-10 hidden md:block" />
         <div className="page-corner left-8 top-8" />
         <div className="page-corner bottom-8 left-8 rotate-[-90deg]" />
         <div className="page-corner right-8 top-8 rotate-90" />
@@ -330,14 +355,15 @@ function Journey() {
 
           return (
           <motion.article
-            key={item}
+            key={item.title}
             {...fadeUp(index * 0.06)}
             className="paper-glass paper-card group relative min-h-56 rounded-2xl p-6"
           >
+            <AnimatedSchoolIcon kind={item.icon} size="sm" delay={index * 0.15} className="absolute -right-3 -top-5 z-10" />
             <span className="absolute -top-3 left-8 h-6 w-6 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--accent))]" />
             <span className="absolute right-8 top-5 text-3xl text-[hsl(var(--sage-dark))]/35">✿</span>
             <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Kỉ niệm {index + 1}</p>
-            <h3 className="mt-4 font-serif text-2xl text-[hsl(var(--foreground))]">{item}</h3>
+            <h3 className="mt-4 font-serif text-2xl text-[hsl(var(--foreground))]">{item.title}</h3>
             <img
               src={asset(memory.image)}
               alt={memory.caption}
@@ -441,6 +467,8 @@ function Mission() {
 }
 
 function EventInfo() {
+  const infoIcons: SchoolIconKind[] = ["clock", "calendar", "globe", "ribbon"];
+
   return (
     <section id="info" className="px-5 py-20 md:px-10">
       <div className="mx-auto max-w-7xl">
@@ -454,7 +482,8 @@ function EventInfo() {
         </motion.h2>
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {eventInfo.map(({ icon: Icon, title, value }, index) => (
-            <motion.article key={title} {...fadeUp(index * 0.07)} className="paper-glass rounded-2xl p-6">
+            <motion.article key={title} {...fadeUp(index * 0.07)} className="paper-glass relative rounded-2xl p-6 pt-12">
+              <AnimatedSchoolIcon kind={infoIcons[index]} size="sm" delay={index * 0.2} className="absolute -top-5 right-5 z-10" />
               <Icon className="h-7 w-7 text-[hsl(var(--sage-dark))]" />
               <h3 className="mt-5 font-serif text-2xl">{title}</h3>
               <p className="mt-3 leading-7 text-muted-foreground">{value}</p>
@@ -477,8 +506,17 @@ function EventInfo() {
 }
 
 function Gallery() {
+  const galleryIcons = [
+    { kind: "pencil", className: "left-[7%] top-32 hidden md:block", size: "sm", delay: 0.2, strength: 8 },
+    { kind: "paperclip", className: "right-[12%] top-20 hidden md:block", size: "sm", delay: 0.6, strength: 6 },
+    { kind: "apple", className: "left-[47%] top-36 hidden lg:block", size: "sm", delay: 1, strength: 7 },
+    { kind: "daisy", className: "right-[5%] bottom-24 hidden lg:block", size: "sm", delay: 1.4, strength: 7 },
+    { kind: "heart", className: "left-[18%] bottom-12 hidden md:block", size: "sm", delay: 1.8, strength: 5 },
+  ] as const;
+
   return (
-    <section className="px-5 py-20 md:px-10">
+    <section className="relative px-5 py-20 md:px-10">
+      <ParallaxIconLayer icons={[...galleryIcons]} />
       <motion.h2 {...fadeUp(0)} className="text-center font-serif text-5xl font-semibold md:text-6xl">
         Những mảnh ghép thanh xuân
       </motion.h2>
@@ -516,6 +554,13 @@ function FinalCta() {
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-[hsl(var(--cream))]/60" />
+      <div className="pointer-events-none absolute inset-0 z-10" aria-hidden="true">
+        <AnimatedSchoolIcon kind="door" size="lg" delay={0.1} className="absolute left-[8%] top-16 hidden md:block" />
+        <AnimatedSchoolIcon kind="cap" size="md" delay={0.5} className="absolute right-[14%] top-20 hidden md:block" />
+        <AnimatedSchoolIcon kind="book" size="lg" delay={0.9} className="absolute bottom-12 left-[18%] hidden lg:block" />
+        <AnimatedSchoolIcon kind="note" size="sm" delay={1.3} className="absolute right-[25%] bottom-16 hidden md:block" />
+        <AnimatedSchoolIcon kind="daisy" size="sm" delay={1.7} className="absolute bottom-10 right-[9%] hidden md:block" />
+      </div>
       <div className="relative z-10 mx-auto max-w-3xl">
         <Logo />
         <motion.h2 {...fadeUp(0)} className="mt-8 font-serif text-5xl font-semibold md:text-7xl">
