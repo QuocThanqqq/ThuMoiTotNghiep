@@ -489,7 +489,7 @@ function EventInfo() {
         </div>
         <motion.a
           {...fadeUp(0.1)}
-          href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20S%C6%B0%20ph%E1%BA%A1m%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh"
+          href="https://www.google.com/maps/place/%C4%90%E1%BA%A1i+H%E1%BB%8Dc+S%C6%B0+Ph%E1%BA%A1m+-+280+An+D%C6%B0%C6%A1ng+V%C6%B0%C6%A1ng/@10.7609921,106.6800193,16z/data=!4m14!1m7!3m6!1s0x31752f1b8e6575c3:0x48d253bde1931e59!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gLSAyODAgQW4gRMawxqFuZyBWxrDGoW5n!8m2!3d10.7609868!4d106.6825942!16s%2Fg%2F1tv21nb4!3m5!1s0x31752f1b8e6575c3:0x48d253bde1931e59!8m2!3d10.7609868!4d106.6825942!16s%2Fg%2F1tv21nb4?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           rel="noreferrer"
           className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[hsl(var(--sage-dark))] px-7 py-3 text-sm font-semibold text-white shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
