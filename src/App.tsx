@@ -21,10 +21,10 @@ import {
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 const fadeUp = (delay: number): MotionProps => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 1, y: 18 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.7, delay, ease: "easeOut" },
+  viewport: { once: true, amount: 0.15 },
+  transition: { duration: 0.55, delay, ease: "easeOut" },
 });
 
 const navLinks = [

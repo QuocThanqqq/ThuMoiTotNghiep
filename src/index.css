@@ -76,6 +76,8 @@
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
     position: relative;
     overflow: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .paper-glass::before {
@@ -139,6 +141,7 @@
   }
 
   .torn-paper {
+    backface-visibility: hidden;
     clip-path: polygon(
       2% 0,
       98% 1%,
@@ -410,6 +413,8 @@
 
   .polaroid {
     position: relative;
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
 
