@@ -168,18 +168,6 @@ function FloatingPetals() {
   );
 }
 
-function ClassroomScene() {
-  return (
-    <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] border border-[hsl(var(--border))] bg-[hsl(var(--paper))] shadow-[0_26px_70px_rgba(91,69,45,0.16)]">
-      <img
-        src={asset("classroom-invitation.jpg")}
-        alt="Minh họa thiệp tốt nghiệp với cửa lớp, bảng phấn và chân dung tốt nghiệp"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
-    </div>
-  );
-}
-
 function Daisy({ className = "" }: { className?: string }) {
   return (
     <div className={`daisy-cluster ${className}`} aria-hidden="true">
@@ -214,9 +202,9 @@ function Hero() {
         <motion.div {...fadeUp(0.05)} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="torn-paper relative overflow-hidden rounded-[2rem] bg-[hsl(var(--paper))] p-3 shadow-[0_24px_60px_rgba(91,69,45,0.18)]">
             <img
-              src={asset("graduation-portrait.png")}
-              alt="Chân dung cô gái mặc áo tốt nghiệp đen đỏ"
-              className="aspect-[3/2] h-auto w-full rounded-[1.5rem] object-contain object-center lg:aspect-auto lg:h-[560px] lg:object-cover lg:object-left"
+              src={asset("classroom-invitation.jpg")}
+              alt="Minh họa thiệp tốt nghiệp với cửa lớp, bảng phấn và chân dung tốt nghiệp"
+              className="aspect-[4/3] h-auto w-full rounded-[1.5rem] object-cover object-center lg:h-[560px]"
             />
           </div>
           <motion.div
@@ -254,12 +242,6 @@ function Hero() {
             >
               Xem thông tin buổi lễ
             </PaperButton>
-          </motion.div>
-          <motion.div {...fadeUp(0.5)}>
-            <div className="relative">
-              <AnimatedSchoolIcon kind="apple" size="sm" delay={0.3} className="absolute bottom-8 right-16 z-20 hidden md:block" />
-              <ClassroomScene />
-            </div>
           </motion.div>
         </div>
       </div>
